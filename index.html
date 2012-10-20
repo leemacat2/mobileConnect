@@ -20,7 +20,7 @@ $(document).ready(function(){
 	$("#email").keyup(function(){});	
 	$("#submit").click(function()
 	{
-		$.post("auth.php",$("#form1").serialize(),function(result)
+		$.post("http://172.16.135.62/conn_trial/auth.php",$("#form1").serialize(),function(result)
 		{
 			if(result =="Invalid username or/and password. Try again.")
 			{
