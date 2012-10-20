@@ -15,12 +15,14 @@ $r=mysql_fetch_row($res);
 
 if($r[0]==$pwd && $pwd!="")
 {
-	echo "Success";		
+	echo "<script type=text/javascript>
+	window.location = 'home.html';
+	</script> ";	
 }
 
-else
+if($r[0]!=$pwd && $pwd=="")
 {
-	echo "<span style='background-color:blue;'><blink>Invalid username or/and password. Try again.</blink></span>";
+	echo "<span style='background-color:blue;'>Invalid username or/and password. Try again.</span>";
 }
 
 
