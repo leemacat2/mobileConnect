@@ -27,9 +27,9 @@ $(document).ready(function(){
 				$("#result").html(result);
 				window.location.reload();
 			}
-			else
+			else if(result =="success")
 			{
-				$("#result").html(result);
+				window.location = 'home.html';
 			}
 		});
 
