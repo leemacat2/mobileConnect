@@ -15,7 +15,7 @@ $r=mysql_fetch_row($res);
 
 if($r[0]==$pwd && $pwd!="")
 {
-	echo "<span style='background-color:blue;'><blink>Success</blink></span>";		
+	echo "Success";		
 }
 
 else
