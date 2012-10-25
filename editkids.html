@@ -1,0 +1,102 @@
+
+<html>
+<head>
+<title>MADApp - Kids</title>
+<title>Manage Volunteers</title>           
+        <meta name="viewport" content="width=device-width,initial-scale=1"> 
+
+<link rel="stylesheet" type="text/css" href="css/ThisIsIt.css">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.mobile-1.1.1.min.js"></script>
+<script type= "text/javascript">
+
+$(document).ready(function(){
+$("#submit").click(function(){
+
+$.post("http://10.0.2.2/ToLearn/edit_kids.php",$("#form1").serialize(),function(result){
+if(result="Updated Successfully")
+$("#result").html(result);
+});
+})
+	
+$("#logout").click(function(){
+window.location="index.html";
+})
+
+$("#dashboard").click(function(){
+ window.location="home.html";
+})
+$('input#date-pick').simpleDatepicker({ startdate: 1992, enddate: 2010 })
+
+});
+</script>
+
+
+
+<link rel="stylesheet" href="css/jquery.mobile.structure-1.1.1.css" />
+</head>
+<body>
+	<div data-role="page" data-add-back-btn="true">
+
+<div data-role="header" data-position="fixed" data-fullscreen="true">
+
+<a href="" data-icon="home"   data-iconpos="notext" id="dashboard"/>Home</a>
+<h1>MADApp</h1>
+<a href="" data-iconpos="notext" data-icon="logout" id="logout">Logout</a>
+
+
+</div><!--header-->
+<br><br>
+<h2>Edit Kids</h2>
+<div id="result"></div>
+
+<form class="mainForm clear" id="form1" action="" method="post" >
+<ul>
+<li><label for="selBulkActions">Select Center</label> 
+<select id="center" name="center" > 
+<option selected="selected" >- Choose -</option> 
+			<option value="41" selected="selected">Don Bosco</option> 
+		 	<option value="57">Pastor Home</option> 
+	</select>
+</li>
+<li><label for="txtName">Name</label>
+	<input id="name" name="name"  type="text"  value="V Velu"/> 
+			
+</li>
+<li><label for="date">Date of Birth</label>
+	<input name="date-pick" class="date-pick" id="date-pick" type="text" value="03/03/1999">
+	<p class="error clear"></p>
+</li><br />
+
+<li><label for="date">Change photo</label>
+	<input name="image"  id="image" type="file">
+	<p class="error clear"></p>
+</li><br />
+<li><label for="txtName"  >Description</label>
+	<textarea rows="5" cols="24" id="description" name="desc">7</textarea> 
+	
+</li>
+</ul>
+<ul>
+<li>
+	<input type="hidden" value="1496"  id="rootId" name="rootId" />
+	<input id="btnSubmit" id="submit" type="submit" value="Update" />
+	<br>
+	<a href="kids.html">Cancel</a>
+</li>
+</form>
+
+<div data-role="footer" data-theme="a" data-position="fixed" data-fullscreen="true" data-id="foo">
+
+	<div data-role="navbar"  >
+		<ul>
+			<li><a href="kids.html" data-icon="back" data-ajax="false">Previous</a></li>
+			<li><a href="updates.html" data-icon="star" data-ajax="false">Updates</a></li>
+			<li><a href="profile.html" data-icon="info">Profile</a></li>
+		
+		</ul>
+	</div><!-- /navbar -->
+
+</div>
+</div>
+</body></html>

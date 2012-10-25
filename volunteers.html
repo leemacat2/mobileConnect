@@ -1,0 +1,249 @@
+<html>
+<head>      
+        <title>Sample Page</title>           
+        <meta name="viewport" content="width=device-width,initial-scale=1"> 
+
+<link rel="stylesheet" type="text/css" href="css/ThisIsIt.css">
+<link rel="stylesheet" href="css/jquery.mobile.structure-1.1.1.css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.mobile-1.1.1.min.js"></script>
+
+<style type="text/css">
+
+.ui-select{
+
+	width: 22.222222328186035%;
+}
+
+</style>
+<script type= "text/javascript" >
+
+
+$(document).ready(function(){
+
+
+	$("#changepage").click(function(){
+
+$.mobile.changePage("#page2");
+
+});
+
+
+$("#back").bind('click',function(){
+
+	var city= $("#city").val();
+
+var group= $("#group").val();
+
+var name= $("#searchvolunteer").val();
+
+
+
+	$("#here").html("<br>");
+
+	$.getJSON("http://10.0.2.2/ToLearn/searchvolunteers.php",{name:name,city:city,group:group},function(result){
+
+//alert(result);
+
+
+  if(result=='')
+  {
+
+  	$("#here").text("no result");
+
+  }
+else
+{
+
+	  $.each(result,function(i,item){
+
+       //$("head").append("<link rel='stylesheet' href='css/jquery.mobile.structure-1.1.1.css' />");
+  
+      $("#here").append("<div data-role='collapsible'><h1>"+item[0]+"</h1><div><ul><li><h2>"+item[1]+"</h2></li><li><h3>"+item[2]+"</h3></li><li><h3>"+item[3]+"</h3></li></ul></div></div>").trigger("create");
+      
+      
+});
+}
+    
+
+
+});
+
+
+});
+
+//alert("daivame..!");
+
+$.getJSON("http://10.0.2.2/ToLearn/volunteers.php",function(result){
+
+
+      $.each(result,function(i,item){
+
+       //$("head").append("<link rel='stylesheet' href='css/jquery.mobile.structure-1.1.1.css' />");
+  
+      $("#here").append("<div data-role='collapsible'><h1>"+item[0]+"</h1><div><ul><li><h2>"+item[1]+"</h2></li><li><h3>"+item[2]+"</h3></li><li><h3>"+item[3]+"</h3></li></ul></div></div>").trigger("create");
+      
+      
+});
+
+
+});
+$.getJSON("http://10.0.2.2/ToLearn/citylist.php",function(result)
+{ 
+$.each(result,function(i,item){
+
+$("#city").append("<option>"+item+"</option>");
+
+});
+
+});
+
+
+$.getJSON("http://10.0.2.2/ToLearn/grouplist.php",function(result)
+{ 
+$.each(result,function(i,item){
+
+$("#group").append("<option>"+item+"</option>");
+
+});
+
+});
+
+
+
+
+
+
+$("#logout").click(function(){
+
+window.location="index.html";
+
+})
+
+$("#dashboard").click(function(){
+
+ window.location="home.html";
+ 
+})
+
+});
+
+
+</script>
+
+</head>
+
+<body>
+
+	<div data-role="page" id="page1">
+
+		<div data-role="header" data-position="fixed" data-fullscreen="true">
+
+<a href="" data-icon="home"   data-iconpos="notext" id="dashboard"/>Home</a>
+<h1>MADApp</h1>
+<a href="" data-iconpos="notext" data-icon="logout" id="logout">Logout</a>
+
+
+
+
+</div><!--header-->
+
+
+		
+		<div data-role="content">
+<br><br><br>
+<div>
+         <h1>VOLUNTEERS</h1>
+		</div>
+		<hr>
+<div align="right">
+<a data-role="button" id="changepage" data-transition="turn" data-theme="a" style="width:20%;" data-icon="search" data-iconpos="right">Search</a>
+		</div>
+
+			<div data-role="collapsible-set" data-iconpos="right" id="here">
+				
+
+			</div>
+
+		</div>
+
+		<div data-role="footer" data-theme="a" data-position="fixed" data-fullscreen="true" data-id="foo">
+
+	<div data-role="navbar"  >
+		<ul>
+			<li><a data-rel="back"  data-icon="back" data-ajax="false">Previous</a></li>
+			<li><a href="updates.html" data-icon="star" data-ajax="false">Updates</a></li>
+			<li><a href="profile.html" data-icon="info">Profile</a></li>
+		
+		</ul>
+	</div><!-- /navbar -->
+
+</div>
+
+</div>
+
+
+<div data-role="page" id="page2">
+
+		<div data-role="header" data-position="fixed" data-fullscreen="true">
+
+<h1>SEARCH</h1>
+
+
+</div><!--header-->
+
+
+		
+		<div data-role="content">
+<br><br><br>
+<div>
+         <h1>VOLUNTEERS</h1>
+		</div>
+		<hr>
+
+<div align="center">
+
+<form id="form1" method="get" action="">
+<label for="searchvolunteer">Search volunteer by Name</label>
+<input id="searchvolunteer" name="searchvolunteer" type="text" style="width:20%;">[OR]
+
+<label for="city" align="center">Look for the volunteer from</label>
+
+<select id="city" name="city">
+    
+<option value="null">AnyCity</option>[OR]
+
+</select>
+
+<label for="group" align="center">Look for the member of group</label>
+
+<select id="group" name="group">
+    
+<option value="null">Any one</option>[OR]
+
+</select>
+</form>
+
+
+		
+<a data-role="button" id="back" data-direction="reverse" data-rel="back" style="width:10%;" data-icon="arrow-r" data-iconpos="right">Go</a>
+</div>
+			
+		</div>
+
+		<div data-role="footer" data-theme="a" data-position="fixed" data-fullscreen="true" data-id="foo">
+
+	<div data-role="navbar"  >
+		<ul>
+			<li><a data-rel="back"  data-icon="back" data-ajax="false">Previous</a></li>
+			<li><a href="updates.html" data-icon="star" data-ajax="false">Updates</a></li>
+			<li><a href="profile.html" data-icon="info">Profile</a></li>
+		
+		</ul>
+	</div><!-- /navbar -->
+
+</div>
+
+</div>
+		</body>
+</html>

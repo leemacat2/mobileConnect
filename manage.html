@@ -1,0 +1,80 @@
+<html>
+<meta name="viewport" content="width=device-width,initial-scale=1"> 
+    <link rel="stylesheet" href="css/jquery.mobile.structure-1.1.1.css" />
+
+<link rel="stylesheet" type="text/css" href="css/ThisIsIt.css">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.mobile-1.1.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+$.getJSON("http://10.0.2.2/ToLearn/centerlist.php",function(result)
+{ 
+$.each(result,function(i,item){
+$("#category").append("<option value="+item+">"+item+"</option>");
+});
+});
+$("#category").change(function()
+{
+var value=$("#category").val();
+$.getJSON("http://10.0.2.2/ToLearn/manage.php",{category:value},function(result){
+$("#opt").append("<p>"+value+"</p><br> <a href=editcenterdetails.html data-role='button' id='editcenter'>Edit Center Details</a><br><a href=volunteers.html data-role='button' data-ajax='false'>Manage Volunteers</a><br><a href=kids.html data-role='button' data-ajax='false'>Manage Kids</a><br><a href=managelevel.html data-role='button'>Manage Level</a><br><a href=managebatches.html data-role='button'>Manage Batches</a>").trigger("create");
+});
+});
+$("#logout").click(function(){
+
+window.location="index.html";
+
+})
+
+$("#dashboard").click(function(){
+
+ window.location="home.html";
+ 
+})
+});
+</script>
+<body>
+
+	<div data-role="page">
+
+		<div data-role="header" data-position="fixed" data-fullscreen="true">
+
+<a href="" data-icon="home"   data-iconpos="notext" id="dashboard"/>Home</a>
+<h1>MADApp</h1>
+<a href="" data-iconpos="notext" data-icon="logout" id="logout">Logout</a>
+</div><!--header-->
+<br><br><br>
+
+		<div data-role="content">
+
+
+ 
+<select id="category" name="category">
+    
+<option value="MyClass">Choose Center</option>
+
+</select>
+<div id="opt">
+	</div>
+
+</div>
+
+<div data-role="footer" data-theme="a" data-position="fixed" data-fullscreen="true" data-id="foo">
+
+	<div data-role="navbar"  >
+		<ul>
+			<li><a data-rel="back" data-icon="back" data-ajax="false">Previous</a></li>
+			<li><a href="updates.html" data-icon="star" data-ajax="false">Updates</a></li>
+			<li><a href="profile.html" data-icon="info">Profile</a></li>
+		
+		</ul>
+	</div><!-- /navbar -->
+
+</div>
+
+</div>
+
+</body>
+</html>
+
+

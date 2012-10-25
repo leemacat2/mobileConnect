@@ -1,0 +1,261 @@
+<html>
+<head>      
+        <title>Classes</title>           
+        <meta name="viewport" content="width=device-width,initial-scale=1"> 
+
+<link rel="stylesheet" type="text/css" href="css/ThisIsIt.css">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.mobile-1.1.1.min.js"></script>
+<script type= "text/javascript">
+
+$(document).ready(function(){
+
+var today=new Date();
+
+var year=today.getFullYear();
+
+var month=today.getMonth()+1;
+
+var date=today.getDate();
+
+
+//alert(month);
+$.getJSON("http://10.0.2.2/ToLearn/centerlist.php",function(result)
+{ 
+$.each(result,function(i,item){
+
+$("#center").append("<option>"+item+"</option>");
+
+});
+
+});
+
+
+$("#center").change(function(){
+
+var center=$("#center").val();
+
+$("#divlevel").css("visibility","visible");
+
+$("#level").html("<option>loading..</option>");
+
+$.getJSON("http://10.0.2.2/ToLearn/levellist.php",{center:center},function(result)
+{ 
+$.each(result,function(i,item){
+
+$("#level").append("<option>"+item+"</option>");
+
+});
+
+});
+
+});
+
+
+$("#level").change(function(){
+
+//alert(level);
+
+$("#divthemes").css("visibility","visible");
+
+//$("#kids").html("<option>loading..</option>");
+
+});
+
+
+$("#themes").change(function(){
+
+	$("#date").css("visibility","visible");
+
+$("#divkids").css("visibility","visible");
+
+var center=$("#center").val();
+
+var level=$("#level").val();
+
+$("#kids").html("<option>loading..</option>");
+
+
+
+$.getJSON("http://10.0.2.2/ToLearn/kidslist.php",{center:center,level:level},function(result)
+{
+
+$.each(result,function(i,item)
+{
+
+$("#kids").append("<option>"+item+"</option>");
+
+});
+
+
+});
+
+});
+
+
+$("#kids").change(function(){
+
+
+
+$("#divmarks").css("visibility","visible");
+
+var center=$("#center").val();
+
+var level=$("#level").val();
+
+var kid=$("#kids").val();
+
+
+
+$("#scores").html("<tr><b><td>Name</td><td>Speak</td><td>Listen</td><td>Progress</td></b></tr><tr align='center'><td>"+kid+"</td><td><input type='text' id='speaking' name='speaking' size='2' maxlength='2'></td><td><input type='text' id='listening' name='listening' size='2' maxlength='2'></td><td><input type='text' id='progress' name='progress' size='2' maxlength='2'></td></tr>");
+
+
+
+});
+
+$("#submit").click(function(){
+
+var center=$("#center").val();
+
+var level=$("#level").val();
+
+var theme=$("#themes").val();
+
+var date=$("#examdate").val();
+
+
+$.getJSON("http://10.0.2.2/ToLearn/addresults.php",{center:center,level:level,theme:theme,date:date},function(result){
+
+
+
+alert("Entry successful");
+
+
+});
+
+});
+
+ $("#logout").click(function(){
+
+window.location="index.html";
+
+})
+
+$("#dashboard").click(function(){
+
+ window.location="home.html";
+ 
+})
+
+});
+
+
+</script>
+<link rel="stylesheet" href="css/jquery.mobile.structure-1.1.1.css" />
+</head>
+
+<body>
+
+	<div data-role="page">
+
+		<div data-role="header" data-position="fixed" data-fullscreen="true">
+
+<a href="" data-icon="home"   data-iconpos="notext" id="dashboard"/>Home</a>
+<h1>MADApp</h1>
+<a href="" data-iconpos="notext" data-icon="logout" id="logout">Logout</a>
+</div><!--header-->
+<br><br><br>
+
+<div data-role="content"  data-theme="a">
+
+<div align="center">
+	<form name="examresults" id="form1" style="width:50%;">
+      <table>
+   
+       <tr><td>Center</td><td>
+<select id="center">
+<option>Select Center</option>
+</select>
+</td></tr>
+
+<tr style="visibility:hidden;" id="divlevel">
+
+   <td>    Level</td>
+   <td>
+<select id="level">
+<option>Select  Level</option>
+</select>
+</tr>
+
+
+
+<tr style="visibility:hidden;" id="divthemes"> <td>Themes</td>
+	<td>
+<select id="themes">
+<option>Select themes</option>
+<option>BAT</option>
+<option>Theme A</option>
+<option>Theme B</option>
+<option>Theme C</option>
+<option>Theme D</option>
+</select></td>
+</tr>
+
+<tr style="visibility:hidden;" id="date" ><td>Date</td>
+<td><input type="text" value="yyyy-mm-dd" id="examdate">
+</td>
+</tr>		
+
+
+<tr style="visibility:hidden;" id="divkids"> <td>Kids</td>
+	<td>
+<select id="kids">
+<option>Select kid</option>
+</select></td>
+</tr>
+</table>
+
+<span style="visibility:hidden;" id="divmarks">
+
+<table id="scores" >
+	<tr>
+		<th></th>
+		<th>Speak(20)
+		</th>
+        <th>Listen(12)
+        </th>
+        <th>Progress(35)</th>
+	
+	</tr>
+
+</table>
+
+</span>
+<input type="button" id="submit" value="Enter Marks">
+
+	</form>
+
+
+</div>
+</div>
+
+		
+<div data-role="footer" data-theme="a" data-position="fixed" data-fullscreen="true" data-id="foo">
+
+	<div data-role="navbar"  >
+		<ul>
+			<li><a data-rel="back" data-icon="back" data-ajax="false">Previous</a></li>
+			<li><a href="updates.html" data-icon="star" data-ajax="false">Updates</a></li>
+			<li><a href="profile.html" data-icon="info">Profile</a></li>
+		
+		</ul>
+	</div><!-- /navbar -->
+
+</div>
+
+</div>
+
+	</body>
+
+
+</html>

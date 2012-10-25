@@ -1,0 +1,204 @@
+<html>
+<title>
+Profile
+</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+<link rel="stylesheet" type="text/css" href="css/ThisIsIt.css">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.mobile-1.1.1.min.js"></script>
+
+
+<link rel="stylesheet" href="css/jquery.mobile.structure-1.1.1.min.css" />
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+//$(":radio").width("20%");
+	//$(".input").width("20%");
+	$(":text").width("20%");
+
+$.getJSON("http://10.0.2.2/ToLearn/profiledata.php",function(result)
+{ 
+
+
+//alert(result.phone);
+
+$("#name").attr("value",result.name);
+
+
+
+if(result.sex=="f")
+{
+      //alert(result.sex);
+
+	$("#r2").attr("checked","checked");
+
+	$("#l2").removeClass("ui-btn-on ui-radio-off").addClass("ui-btn-active ui-radio-on");
+}
+else
+{
+	$("#r1").attr("checked","checked");
+
+    $("#l2").removeClass("ui-btn-on ui-radio-off").addClass("ui-btn-active ui-radio-on");
+
+}
+
+$("#phno").attr("value",result.phone);
+
+$("#email").attr("value",result.email);
+
+$("#address").attr("value",result.address);
+
+$("#pswd1").attr("value",result.password);
+
+$("#pswd2").attr("value",result.password);
+
+});
+
+$("#submit").click(function(){
+
+if($("#pswd1").val()==$("#pswd2").val())
+{
+	
+$.post("http://10.0.2.2/ToLearn/profilesubmit.php",$("#profile").serialize(),function(){
+
+alert("updated!");
+
+
+});
+
+}
+else
+{
+	alert("Unmatching Passwords.")
+}
+
+});
+
+
+
+
+$("#logout").click(function(){
+
+window.location="index.html";
+
+});
+
+$("#dashboard").click(function(){
+
+ window.location="home.html";
+ 
+});
+
+
+});
+
+
+
+</script>
+
+<body>
+
+<div data-role="page" data-add-back-btn="true">
+
+<div data-role="header" data-position="fixed" data-fullscreen="true">
+
+<a href="" data-icon="home"   data-iconpos="notext" id="dashboard"/>Home</a>
+<h1>MADApp</h1>
+<a href="" data-iconpos="notext" data-icon="logout" id="logout">Logout</a>
+
+
+</div><!--header-->
+
+
+
+<div data-role="content"  data-theme="a">
+
+<br>
+<br>
+
+<img src="images/Logo.png" alt="name" align="right" height="20%" width="10%" border="2px"/>
+
+<br>
+
+
+<form name="profile" method="post" action="" id="profile">
+Name
+	
+	<input type="text" name="name" class="input" id="name"><hr>
+
+	Sex<br>
+     <fieldset data-role="controlgroup" data-type="horizontal">
+     
+         <input type="radio" name="gender" id="r1" value="m" >
+         <label for="r1" class="input" id="l1">Male
+         </label>
+              <input type="radio" name="gender" id="r2" value="f">
+              <label for="r2" class="input" id="l2">
+         	   Female
+              </label>
+
+     </fieldset>
+    <hr>
+	
+Contact No
+<br>
+	<input type="text" name="phno" id="phno" class="input">
+<hr>
+  Email-id
+	
+	<br>
+	<input type="text" name="email" id="email" class="input">
+<hr>
+Address
+	<br>
+        <textarea class="input" id="address" name="address">
+Type your Address
+        </textarea>
+	<hr>
+Password
+	<br>
+	<input type="text" name="pswd1" id="pswd1" class="input">
+  
+  <hr>
+	 Confirm Password  
+	 <br>
+	 <input type="text" name="pswd2" id="pswd2" class="input">  
+  
+  <hr>
+	 Change Profile Photo  
+	 <br>
+	 <input type="file" name="photo" class="input">  
+  
+    <hr>
+	<input type="submit" value="Submit" id="submit">  
+
+
+</form>
+
+
+
+</div>
+<div data-role="footer" data-theme="a" data-position="fixed" data-fullscreen="true" data-id="foo">
+
+	<div data-role="navbar"  >
+		<ul>
+			<li><a data-rel="back" data-icon="back" data-ajax="false">Previous</a></li>
+			<li><a href="updates.html" data-icon="star" data-ajax="false">Updates</a></li>
+			<li><a href="profile.html" data-icon="info">Profile</a></li>
+		
+		</ul>
+	</div><!-- /navbar -->
+
+</div>
+
+
+
+
+</div>
+
+</body>
+
+
+</html>

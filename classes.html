@@ -1,0 +1,174 @@
+<html>
+<head>      
+        <title>Classes</title>           
+        <meta name="viewport" content="width=device-width,initial-scale=1"> 
+
+<link rel="stylesheet" type="text/css" href="css/ThisIsIt.css">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.mobile-1.1.1.min.js"></script>
+<script type= "text/javascript">
+
+$(document).ready(function(){
+
+	$("#p").click(function(){
+
+		 $("#result1").html("<br>");
+
+	$.getJSON("http://10.0.2.2/ToLearn/projected.php",function(result){
+           
+           $("#result1").append("<div data-role='collapsible-set' id='sult1'>");
+
+		$.each(result,function(i,item){
+
+		$("#sult1").append("<div data-role='collapsible'><h4>"+item[0]+"</h4><div>"+item[1]+" Class  @  "+item[2]+"</div></div>").trigger("create");
+	 	
+		});
+
+	 	});
+   });
+
+	$("#t").click(function(){
+
+$("#result2").html("<br>");
+	$.getJSON("http://10.0.2.2/ToLearn/taken.php",function(result){
+
+       $("#result2").append("<div data-role='collapsible-set' id='sult2'>");
+
+		$.each(result,function(i,item){
+
+  		$("#sult2").append("<div data-role='collapsible'><h4>"+item[0]+"</h4><div>"+item[1]+" Class  @  "+item[2]+"</div></div>").trigger("create");
+
+  	});
+
+  	});
+   });
+
+  	$("#s").click(function(){
+
+$("#result3").html("<br>");
+
+	$.getJSON("http://10.0.2.2/ToLearn/substituted.php",function(result){
+
+      
+       $("#result3").append("<div data-role='collapsible-set' id='sult3'>");
+		
+		$.each(result,function(i,item){
+
+  		$("#sult3").append("<div data-role='collapsible'><h4>"+item[0]+"</h4><div>"+item[1]+" Class  @  "+item[2]+"</div></div>").trigger("create");
+  	});
+  	});
+    });
+
+  	$("#m").click(function(){
+
+  		$("#result4").html("<br>");
+  		
+	$.getJSON("http://10.0.2.2/ToLearn/missed.php",function(result){
+
+		$("#result4").append("<div data-role='collapsible-set' id='sult4'>");
+
+		$.each(result,function(i,item){
+
+  		$("#sult4").append("<div data-role='collapsible'><h4>"+item[0]+"</h4><div>"+item[1]+" Class  @  "+item[2]+" by "+item[3]+"</div></div>").trigger("create");
+  	  });
+
+	   });
+
+
+       });
+
+  	$("#logout").click(function(){
+
+window.location="index.html";
+
+})
+
+$("#dashboard").click(function(){
+
+ window.location="home.html";
+ 
+})
+
+});
+
+
+</script>
+<link rel="stylesheet" href="css/jquery.mobile.structure-1.1.1.css" />
+</head>
+
+<body>
+
+	<div data-role="page">
+
+		<div data-role="header" data-position="fixed" data-fullscreen="true">
+
+<a href="" data-icon="home"   data-iconpos="notext" id="dashboard"/>Home</a>
+<h1>MADApp</h1>
+<a href="" data-iconpos="notext" data-icon="logout" id="logout">Logout</a>
+</div><!--header-->
+<br><br><br>
+
+		<div data-role="content">
+
+
+         <h1>CLASSES</h1>
+<div data-role="collapsible-set" data-theme="a">
+
+<div data-role="collapsible" id="tab1" data-iconpos="right">
+	<h1 id="p">PROJECTED CLASSES</h1>
+	<div id="result1">
+
+               
+           </div>
+
+</div>
+
+<div data-role="collapsible" data-iconpos="right" id="tab2">
+	<h1 id="t">TAKEN CLASSES</h1>
+	<div  id="result2">
+
+                
+           </div>
+
+</div>
+
+<div data-role="collapsible" data-iconpos="right" id="tab3">
+	<h1 id="s">SUBSTITUTED CLASSES</h1>
+	<div  id="result3">
+
+                
+           </div>
+
+</div>
+<div data-role="collapsible" data-iconpos="right" id="tab4">
+	<h1 id="m">MISSED CLASSES</h1>
+	<div id="result4">
+
+                
+           </div>
+
+</div>
+
+</div>
+
+</div>
+
+<div data-role="footer" data-theme="a" data-position="fixed" data-fullscreen="true" data-id="foo">
+
+	<div data-role="navbar"  >
+		<ul>
+			<li><a data-rel="back" data-icon="back" data-ajax="false">Previous</a></li>
+			<li><a href="updates.html" data-icon="star" data-ajax="false">Updates</a></li>
+			<li><a href="profile.html" data-icon="info">Profile</a></li>
+		
+		</ul>
+	</div><!-- /navbar -->
+
+</div>
+
+</div>
+
+	</body>
+
+
+</html>

@@ -1,0 +1,213 @@
+<html>
+<head>      
+        <title>Classes</title>           
+        <meta name="viewport" content="width=device-width,initial-scale=1"> 
+
+<link rel="stylesheet" type="text/css" href="css/ThisIsIt.css">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.mobile-1.1.1.min.js"></script>
+<script type= "text/javascript">
+
+$(document).ready(function(){
+
+
+$.getJSON("http://10.0.2.2/ToLearn/centerlist.php",function(result)
+{ 
+$.each(result,function(i,item){
+
+$("#center").append("<option>"+item+"</option>");
+
+});
+
+});
+
+
+$("#center").change(function(){
+
+var center=$("#center").val();
+
+
+$("#level").html("<option>loading..</option>");
+
+$.getJSON("http://10.0.2.2/ToLearn/levellist.php",{center:center},function(result)
+{ 
+$.each(result,function(i,item){
+
+$("#level").append("<option>"+item+"</option>");
+
+});
+
+});
+
+});
+
+
+$("#level").change(function(){
+
+var center=$("#center").val();
+
+var level=$("#level").val();
+
+//alert(level);
+
+
+
+$("#kids").html("<option>loading..</option>");
+
+
+
+$.getJSON("http://10.0.2.2/ToLearn/kidslist.php",{center:center,level:level},function(result)
+{ 
+$.each(result,function(i,item){
+
+$("#kids").append("<option>"+item+"</option>");
+
+});
+
+});
+
+});
+
+$("#submit").click(function(){
+
+
+var speaking=$("#speaking").val();
+
+var listening=$("#listening").val();
+
+var progress=$("#progress").val();
+
+$.getJSON("http://10.0.2.2/ToLearn/entermarks.php",{speaking:speaking,listening:listening;progress:progress},function(result){
+
+	alert("marks entered succeesfully!");
+});
+
+});
+	  
+
+ $("#logout").click(function(){
+
+window.location="index.html";
+
+})
+
+$("#dashboard").click(function(){
+
+ window.location="home.html";
+ 
+})
+
+});
+
+
+</script>
+<link rel="stylesheet" href="css/jquery.mobile.structure-1.1.1.css" />
+</head>
+
+<body>
+
+	<div data-role="page">
+
+		<div data-role="header" data-position="fixed" data-fullscreen="true">
+
+<a href="" data-icon="home"   data-iconpos="notext" id="dashboard"/>Home</a>
+<h1>MADApp</h1>
+<a href="" data-iconpos="notext" data-icon="logout" id="logout">Logout</a>
+</div><!--header-->
+<br><br><br>
+
+<div data-role="content"  data-theme="a">
+
+<div align="center">
+	<form name="examresults" id="form1" style="width:50%;">
+      
+      Date<br>
+<input type="text" id="date" name="date">
+
+       Center<br>
+<select id="center">
+<option>Select Center</option>
+</select>
+<div  id="divlevel">
+
+       Level<br>
+<select id="level">
+<option>Select  Level</option>
+</select>
+</div>
+
+<div  id="divkids">
+
+       Kids<br>
+<select id="kids">
+<option>Select Kids</option>
+</select>
+</div>
+
+<div id="divmarks" >
+<table>
+	<tr>
+		<th>Section
+		</th>
+        <th>Score
+        </th>
+	</tr>
+<tr>
+<td>speaking(20)
+</td>
+<td>
+	<input type="text" id="speaking" name="speaking" size="3">
+</td>
+
+</tr>
+
+<tr>
+<td>Listening(12)
+</td>
+<td>
+	<input type="text" id="listening" name="listening">
+</td>
+
+</tr>
+
+<tr>
+<td>Progress Test(35)
+</td>
+<td><input type="text" id="progress" name="progress">
+
+</td>
+	</tr>
+
+</table>
+
+
+</div>
+
+<input type="button" id="submit" value="Enter Marks">
+
+	</form>
+
+
+</div>
+</div>
+
+		
+<div data-role="footer" data-theme="a" data-position="fixed" data-fullscreen="true" data-id="foo">
+
+	<div data-role="navbar"  >
+		<ul>
+			<li><a data-rel="back" data-icon="back" data-ajax="false">Previous</a></li>
+			<li><a href="updates.html" data-icon="star" data-ajax="false">Updates</a></li>
+			<li><a href="profile.html" data-icon="info">Profile</a></li>
+		
+		</ul>
+	</div><!-- /navbar -->
+
+</div>
+
+</div>
+
+	</body>
+
+
+</html>
