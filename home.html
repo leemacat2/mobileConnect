@@ -1,5 +1,167 @@
 <html>
+
+<head>
+<title>
+ThisIsIt
+</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1,"> 
+
+<link rel="stylesheet" type="text/css" href="css/ThisIsIt.css"/>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.mobile-1.1.1.min.js"></script>
+
+
+<link rel="stylesheet" href="css/jquery.mobile.structure-1.1.1.min.css" />
+<!--script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script-->
+
+<style type="text/css">
+.imgbox{
+
+height: 100px;
+background-color: rgb(250,250,250);
+
+
+}
+.imgtext{
+text-align: left;
+padding:0px;
+}
+img
+{
+  width: 60px;
+  height: 60px;
+padding: 10px 15px 10px 15px ;
+}
+
+</style>
+
+
+<script type="text/javascript">
+
+function getCookie(c_name)
+{
+var i,x,y,z,ARRcookies=document.cookie.split(";");
+for (i=0;i<ARRcookies.length;i++)
+{
+  x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+  y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+  x=x.replace(/^\s+|\s+$/g,"");
+  
+
+  if (x==c_name)
+    {
+
+    y=y.replace(/\+/g," ");
+
+    return unescape(y);
+    }
+
+  }
+}
+
+$(function(){
+
+	$("#uname").text(getCookie('uname'));
+
+    $("#title").text(getCookie('title'));
+
+
+	var item =new Array();
+
+    $.getJSON("http://10.0.2.2/ToLearn/iconslist.php",function(result){
+
+      $.each(result,function(i,item){
+  
+      $("#icons").append("<div class=imgbox><a href=''><img id="+item+" src=images/"+item+".png></a><div class=imgtext>"+item+"</div></div><br>");
+         
+        
+         $("#"+item).click(function(result){
+
+         window.location=item+".html";
+
+         });
+
+            
+
+      });
+
+    });
+
+$("#logout").click(function(){
+
+window.location="index.html";
+
+})
+
+$("#dashboard").click(function(){
+
+ window.location="home.html";
+
+
+})
+
+$("#profile").click(function(){
+
+ window.location="profile.html";
+
+ })
+
+
+});
+
+</script>
+
+
+</head>
+
 <body>
-Success
+<div data-role="page" data-add-back-btn="true">
+
+<div data-role="header" data-position="fixed" data-fullscreen="true">
+
+<a href="" data-icon="home"   data-iconpos="notext" id="dashboard"/>Home</a>
+<h1>MADApp</h1>
+<a href="" data-iconpos="notext" data-icon="logout" id="logout">Logout</a>
+
+
+
+
+</div><!--header-->
+
+
+<div data-role="content"  data-theme="a">
+<p><br></p>
+<div id="uname" align ="right" style="font:20px calibri bold;"> </div>
+<div id="title" align="right" style="font:20px  italic bold, serif;">  </div>
+
+<ul  data-role="list-view"> 
+<div id="icons">
+</div>
+
+
+</ul>
+
+
+
+</div>
+<div data-role="footer" data-theme="a" data-position="fixed" data-fullscreen="true" data-id="foo">
+
+	<div data-role="navbar"  >
+		<ul>
+			<li><a data-rel="back" data-icon="back" data-ajax="false">Previous</a></li>
+			<li><a href="updates.html" data-icon="star" data-ajax="false">Updates</a></li>
+			<li><a href="" id="profile" data-icon="info" data-ajax="false">Profile</a></li>
+		
+		</ul>
+	</div><!-- /navbar -->
+
+</div>
+
+</div>
+
 </body>
+
+
 </html>
