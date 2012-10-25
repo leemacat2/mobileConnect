@@ -27,9 +27,14 @@ $(document).ready(function(){
 				$("#result").html(result);
 				window.location.reload();
 			}
-			else
+			else if(result=="success" )
 			{
 				window.location = 'home.html';
+			}
+			else if(result =="nothing happened")
+			{
+				$("#result").html(result);
+				window.location.reload();
 			}
 		});
 
